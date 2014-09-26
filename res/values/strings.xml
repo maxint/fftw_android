@@ -8,7 +8,8 @@
     <string name="fftw_dft_2d">fftw_dft_2d</string>
     <string name="fftw_dft_r2c_2d">fftw_dft_r2c_2d</string>
     <string name="fftwf_dft_r2c_2d">fftwf_dft_r2c_2d</string>
+    <string name="fftwf_dft_r2c_2d_measure">fftwf_dft_r2c_2d_measure</string>
     <string name="fftwf_dft_r2c_2d_thread">fftwf_dft_r2c_2d_thread</string>
     <string name="fftwf_dft_r2c_2d_thread_measure">fftwf_dft_r2c_2d_thread_measure</string>
-
+    
 </resources>

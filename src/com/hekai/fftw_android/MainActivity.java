@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class MainActivity extends Activity implements OnClickListener{
 
 	private Button bt_init, bt_fftw_dft_2d, bt_fftw_dft_r2c_2d,
-			bt_fftwf_dft_r2c_2d, bt_fftwf_dft_r2c_2d_thread,
+			bt_fftwf_dft_r2c_2d, bt_fftwf_dft_r2c_2d_measure, bt_fftwf_dft_r2c_2d_thread,
 			bt_fftwf_dft_r2c_2d_thread_measure;
 	
 	private TextView tv_result;
@@ -29,6 +29,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		bt_fftw_dft_2d = (Button)findViewById(R.id.bt_fftw_dft_2d);
 		bt_fftw_dft_r2c_2d = (Button)findViewById(R.id.bt_fftw_dft_r2c_2d);
 		bt_fftwf_dft_r2c_2d = (Button)findViewById(R.id.bt_fftwf_dft_r2c_2d);
+		bt_fftwf_dft_r2c_2d_measure = (Button)findViewById(R.id.bt_fftwf_dft_r2c_2d_measure);
 		bt_fftwf_dft_r2c_2d_thread = (Button)findViewById(R.id.bt_fftwf_dft_r2c_2d_thread);
 		bt_fftwf_dft_r2c_2d_thread_measure = (Button)findViewById(R.id.bt_fftwf_dft_r2c_2d_thread_measure);
 		
@@ -36,6 +37,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		bt_fftw_dft_2d.setOnClickListener(this);
 		bt_fftw_dft_r2c_2d.setOnClickListener(this);
 		bt_fftwf_dft_r2c_2d.setOnClickListener(this);
+		bt_fftwf_dft_r2c_2d_measure.setOnClickListener(this);
 		bt_fftwf_dft_r2c_2d_thread.setOnClickListener(this);
 		bt_fftwf_dft_r2c_2d_thread_measure.setOnClickListener(this);
 	}
@@ -50,6 +52,8 @@ public class MainActivity extends Activity implements OnClickListener{
 			mHandler.obtainMessage(MSG_ID_DFT_R2C_2D).sendToTarget();
 		}else if(v.equals(bt_fftwf_dft_r2c_2d)){
 			mHandler.obtainMessage(MSG_ID_F_DFT_R2C_2D).sendToTarget();
+		}else if(v.equals(bt_fftwf_dft_r2c_2d_measure)){
+			mHandler.obtainMessage(MSG_ID_F_DFT_R2C_2D_MEASURE).sendToTarget();
 		}else if(v.equals(bt_fftwf_dft_r2c_2d_thread)){
 			mHandler.obtainMessage(MSG_ID_F_DFT_R2C_2D_THREAD).sendToTarget();
 		}else if(v.equals(bt_fftwf_dft_r2c_2d_thread_measure)){
@@ -62,6 +66,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	private static final int MSG_ID_DFT_2D=2;
 	private static final int MSG_ID_DFT_R2C_2D=3;
 	private static final int MSG_ID_F_DFT_R2C_2D=4;
+	private static final int MSG_ID_F_DFT_R2C_2D_MEASURE=7;
 	private static final int MSG_ID_F_DFT_R2C_2D_THREAD=5;
 	private static final int MSG_ID_F_DFT_R2C_2D_THREAD_MEASURE=6;
 	
@@ -78,6 +83,7 @@ public class MainActivity extends Activity implements OnClickListener{
 			case MSG_ID_DFT_2D:
 			case MSG_ID_DFT_R2C_2D:
 			case MSG_ID_F_DFT_R2C_2D:
+			case MSG_ID_F_DFT_R2C_2D_MEASURE:
 			case MSG_ID_F_DFT_R2C_2D_THREAD:
 			case MSG_ID_F_DFT_R2C_2D_THREAD_MEASURE:
 				new FftwThread(this,msg.what).start();
@@ -111,6 +117,8 @@ public class MainActivity extends Activity implements OnClickListener{
 					break;
 				case MSG_ID_F_DFT_R2C_2D:
 					result = Utils.fftwf_dft_r2c_2d();
+				case MSG_ID_F_DFT_R2C_2D_MEASURE:
+					result = Utils.fftwf_dft_r2c_2d_measure();
 					break;
 				case MSG_ID_F_DFT_R2C_2D_THREAD:
 					result = Utils.fftwf_dft_r2c_2d_thread();

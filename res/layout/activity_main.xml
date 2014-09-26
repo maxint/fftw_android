@@ -14,31 +14,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/init" />
-    
+
     <Button
         android:id="@+id/bt_fftw_dft_2d"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/fftw_dft_2d" />
-    
+
     <Button
         android:id="@+id/bt_fftw_dft_r2c_2d"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/fftw_dft_r2c_2d" />
-    
+
     <Button
         android:id="@+id/bt_fftwf_dft_r2c_2d"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/fftwf_dft_r2c_2d" />
-    
+
+    <Button
+        android:id="@+id/bt_fftwf_dft_r2c_2d_measure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fftwf_dft_r2c_2d_measure" />
+
     <Button
         android:id="@+id/bt_fftwf_dft_r2c_2d_thread"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/fftwf_dft_r2c_2d_thread" />
-    
+
     <Button
         android:id="@+id/bt_fftwf_dft_r2c_2d_thread_measure"
         android:layout_width="match_parent"

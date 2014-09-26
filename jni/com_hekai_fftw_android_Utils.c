@@ -12,7 +12,7 @@
 #define LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 #define LOGF(...)  __android_log_print(ANDROID_LOG_FATAL,LOG_TAG,__VA_ARGS__)
 
-#define SIZE 160 //SIZE x SIZE , default: 160 x 160
+#define SIZE 72 // 72 //SIZE x SIZE , default: 160 x 160
 
 int init_in_fftw_complex(fftw_complex* in){
 	int i,j,index;
@@ -131,6 +131,41 @@ JNIEXPORT jstring JNICALL Java_com_hekai_fftw_1android_Utils_fftwf_1dft_1r2c_12d
 	LOGD("fftwf_dft_r2c_2d() costs time %f ms", t_span);
 
 	return (*env)->NewStringUTF(env, "fftwf_dft_r2c_2d");
+}
+
+JNIEXPORT jstring JNICALL Java_com_hekai_fftw_1android_Utils_fftwf_1dft_1r2c_12d_1measure(
+		JNIEnv * env, jobject thiz) {
+	double t_start, t_end, t_span;
+
+	int i;
+	float *in;
+	fftwf_complex *out;
+	fftwf_plan p;
+	int NTmp = floor(SIZE / 2 + 1);
+	in = (float*) fftw_malloc(sizeof(float) * SIZE * SIZE);
+	out = (fftwf_complex*) fftwf_malloc(sizeof(fftwf_complex) * SIZE * NTmp);
+
+	init_in_fftwf_float(in);
+
+	LOGD("fftwf_dft_r2c_2d_measure() planing...");
+	p = fftwf_plan_dft_r2c_2d(SIZE, SIZE, in, out, FFTW_ESTIMATE); // FFTW_MEASURE
+	LOGD("fftwf_dft_r2c_2d_measure() planing end");
+
+#define NUM 100
+	t_start = now_ms();
+
+	for (i=0; i<NUM; ++i)
+		fftwf_execute(p);
+
+	t_end = now_ms();
+	t_span = t_end - t_start;
+	LOGD("fftwf_dft_r2c_2d_measure() costs time %f ms, avg %f ms", t_span, t_span / NUM);
+
+	fftwf_destroy_plan(p);
+	fftwf_free(in);
+	fftwf_free(out);
+
+	return (*env)->NewStringUTF(env, "fftwf_dft_r2c_2d_measure");
 }
 
 JNIEXPORT jstring JNICALL Java_com_hekai_fftw_1android_Utils_fftwf_1dft_1r2c_12d_1thread(
